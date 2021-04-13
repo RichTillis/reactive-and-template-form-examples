@@ -1,0 +1,40 @@
+<div>
+  <table>
+    <thead><tr><th>Product Name</th><th>Product Variety</th><th>Product Origin</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let product of productlist | async">
+        <td>{{product.product_name}}</td>
+        <td>{{product.product_variety}}</td>
+        <td>{{product.product_origin}}</td>
+        <td>
+          <button (click)="setProductForm(product.product_id)">Update</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="isEditing">
+  <form novalidate #productForm (ngSubmit)="updateProduct()">
+
+    <div><input name="productId" type="hidden" [(ngModel)]="product_id"></div>
+
+    <div>
+      <label for="productName">Product Name </label>
+      <input id="productName" name="productName" type="text" [(ngModel)]="product_name" required>
+    </div>
+
+    <div>
+      <label for="productVariety">Product Variety </label>
+      <input id="productVariety" name="productVariety" type="text" [(ngModel)]="product_variety">
+    </div>
+
+    <div>
+      <label for="productOrigin" >Product Origin</label>
+      <input id="productOrigin" name="productOrigin" type="text" [(ngModel)]="product_origin">
+    </div>
+
+    <button type="submit">Update</button>
+
+  </form>
+</div>
